@@ -1,6 +1,7 @@
 #SELEÇÃO
 
 from typing import Match
+from math import log
 
 
 print("Bem-vindo a cálculadora da economia!")
@@ -41,7 +42,7 @@ match opcao:
                         n = float(input("Número de períodos: "))
                         resultado = P * (1 + i) ** n
                         print("O montante é: ", resultado)
-                        break
+                        
                       
                     case "2":
                         print("Você selecionou Capital inicial.")
@@ -51,7 +52,7 @@ match opcao:
                         n = float(input("Número de períodos: "))
                         resultado = M / (1 + i) ** n
                         print("O capital inicial é: ", resultado)
-                        break
+                        
                       
                     case "3":
                         print("Você selecionou Taxa por período.")
@@ -61,7 +62,7 @@ match opcao:
                         n = float(input("Número de períodos: "))
                         resultado = (M / P) ** (1 / n) - 1
                         print("A taxa por período é: ", resultado)
-                        break
+                        
 
                     case "4":
                         print("Você selecionou Número de períodos.")
@@ -71,9 +72,9 @@ match opcao:
                         i = float(input("Taxa por período: "))
                         resultado = log(M / P) / log(1 + i)
                         print("O número de períodos é: ", resultado)
-                        break
+                        
                     case "*":
-                        break
+                        pass
 
             case "2":
                 print("Você selecionou Rendas (Anuidades ou Pagamentos Periódicos).")
@@ -94,7 +95,7 @@ match opcao:
                         n = float(input("Número de períodos: "))
                         resultado = P * ((1 - (1 + i) ** -n) / i)
                         print("O valor presente da anuidade é: ", resultado)
-                        break
+                        
 
                     case "2":
                         print("Você selecionou Valor futuro de uma anuidade.")
@@ -104,7 +105,7 @@ match opcao:
                         n = float(input("Número de períodos: "))
                         resultado = P * ((1 - (1 + i) ** n) / i)
                         print("O valor futuro da anuidade é: ", resultado)
-                        break
+                        
 
                     case "3":
                         print("Você selecionou Valor presente de um pagamento único.")
@@ -114,7 +115,7 @@ match opcao:
                         n = float(input("Número de períodos: "))
                         resultado = P / (1 + i) ** n
                         print("O valor presente do pagamento único é: ", resultado)
-                        break
+                        
 
                     case "4":
                         print("Você selecionou Valor futuro de um pagamento único.")
@@ -124,10 +125,10 @@ match opcao:
                         n = float(input("Número de períodos: "))
                         resultado = P * (1 + i) ** n
                         print("O valor futuro do pagamento único é: ", resultado)
-                        break
+                        
                       
                     case "*": 
-                      break
+                        pass
 
             case "3":
                 print("Você selecionou Descontos.")
@@ -145,7 +146,7 @@ match opcao:
                         n = float(input("Número de períodos: "))
                         resultado = P / (1 - i) ** n
                         print("O valor presente do desconto é: ", resultado)
-                        break
+                        
 
                     case "2":
                         print("Você selecionou Valor futuro de um desconto.")
@@ -155,10 +156,11 @@ match opcao:
                         n = float(input("Número de períodos: "))
                         resultado = P * (1 - i) ** n
                         print("O valor futuro do desconto é: ", resultado)
-                        break
+                        
 
                     case "*":
-                      break
+                        pass
+                    
 
             case "4":
                 print("Você selecionou Amortização de Empréstimos.")
@@ -177,16 +179,10 @@ match opcao:
                         resultado = P * (i * (1 + i) ** n) / ((1 + i) ** n - 1)
                         print("O valor da prestação é: ", resultado)
 
-                    """
-                    case "2": 
-                        print("Você selecionou Valor do saldo devedor.")
-                        print("Digite os valores:")
-                        P = float(input("Valor do empréstimo: "))
-                        i = float(input("Taxa por período: "))
-                        n = float(input("Número de períodos: "))
-                        resultado = P * (1 + i) ** n
-                        
-                        """
+                    case "*":
+                        pass
+                    
+                      
 
     case "2":
         print("Você selecionou Introdução à Estatística.")
