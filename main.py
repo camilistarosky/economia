@@ -16,12 +16,15 @@ def main():
         case "1":
             print("")
             print("----------------------------------------")
-            print("Você selecionou Matemática Financeira.")
-            print("Selecione o tópico desejado:")
             print("1 - Juros Compostos")
-            print("2 - Rendas (Anuidades ou Pagamentos Periódicos")
-            print("3 - Descontos")
-            print("4 - Amortização de Empréstimos")
+            print("2 - Rendas / Anuidades (Simples, Antecipada, com Entrada)")
+            print("3 - Descontos (Simples e Compostos, Comercial e Racional)")
+            print("4 - Amortização de Empréstimos (Sistema PRICE)")
+            print("5 - Conversões e Equivalências de Taxas")
+            print("6 - Série de Fibonacci Financeira")
+            print("7 - Estimativa de Valor de Imóvel")
+            print("8 -  Título de Dívida e Cálculo de Desconto")
+            print("9 - Transformações de Taxas Nominal e Efetiva")
     
             opcaoMF = input("Digite o número do tópico desejado: ")
             print("")
@@ -30,8 +33,8 @@ def main():
                 case "1":
                     print("Você selecionou Juros Compostos.")
                     print("O que você deseja descobrir?")
-                    print("1 - Montante")
-                    print("2 - Capital inicial")
+                    print("1 - Valor futuro (FV)")
+                    print("2 - Valor presente (PV)")
                     print("3 - Taxa por período")
                     print("4 - Número de períodos")
                     print(" * - sair")
@@ -41,22 +44,22 @@ def main():
     
                     match opcaoJC:
                         case "1":
-                            print("Você selecionou Montante.")
+                            print("Você selecionou Valor futuro (FV).")
                             print("Digite os valores:")
-                            P = float(input("Capital inicial: "))
+                            PV = float(input("Valor presente (PV): "))
                             i = float(input("Taxa por período: ")) / 100
                             n = float(input("Número de períodos: "))
-                            resultado = controller.calcular_montante(P, i, n)
-                            print(f"O montante é: {resultado:.2f}")
+                            resultado = controller.juros_compostos(PV=PV, i=i, n=n)
+                            print(f"O Valor futuro (FV) é: {resultado['FV']:.2f}")
     
                         case "2":
-                            print("Você selecionou Capital inicial.")
+                            print("Você selecionou Valor presente (PV).")
                             print("Digite os valores:")
-                            M = float(input("Montante: "))
-                            i = float(input("Taxa por período: "))
+                            FV = float(input("Valor futuro (FV): "))
+                            i = float(input("Taxa por período: ")) / 100
                             n = float(input("Número de períodos: "))
-                            resultado = controller.calcular_capital(M, i, n)
-                            print(f"O capital inicial é: {resultado:.2f}")
+                            resultado = controller.juros_compostos(FV=FV, i=i, n=n)
+                            print(f"O Valor presente (PV) é: {resultado['PV']:.2f}")
     
                         case "3":
                             print("Você selecionou Taxa por período.")
@@ -72,7 +75,7 @@ def main():
                             print("Digite os valores:")
                             M = float(input("Montante: "))
                             P = float(input("Capital inicial: "))
-                            i = float(input("Taxa por período: "))
+                            i = float(input("Taxa por período: ")) / 100
                             resultado = controller.calcular_num_periodos(P, M, i)
                             print(f"O número de períodos é: {resultado:.2f}")
     
@@ -83,7 +86,7 @@ def main():
                     print(
                         "Você selecionou Rendas (Anuidades ou Pagamentos Periódicos)."
                     )
-                    print("O que você deseja descobrir?")
+                    print("O que voce deseja calcular: ")
                     print("1 - Valor presente de uma anuidade")
                     print("2 - Valor futuro de uma anuidade")
                     print("3 - Valor presente de um pagamento único")
@@ -231,9 +234,14 @@ def main():
     
                         case "*":
                             pass
-    
-        case "2":
-            print("Você selecionou Introdução à Estatística.")
+                case "5":
+                    pass
+                    
+                case "6":
+                    pass
+
+                case "7":
+                    pass
     
 
 if __name__ == "__main__":
