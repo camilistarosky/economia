@@ -177,6 +177,77 @@ def taxa_mensal_para_anual(i_mensal):
     """Converte taxa mensal para anual."""
     return (1 + i_mensal)**12 - 1
 
+def taxa_anual_para_trimestral(i_anual):
+    """Converte taxa anual para trimestral."""
+    return (1 + i_anual)**(1/4) - 1
+
+def taxa_anual_para_semestral(i_anual):
+    """Converte taxa anual para semestral."""
+    return (1 + i_anual)**(1/2) - 1
+
+def taxa_anual_para_diaria(i_anual):
+    """Converte taxa anual para diária (considerando 252 dias úteis)."""
+    return (1 + i_anual)**(1/252) - 1
+
+def taxa_semestral_para_anual(i_semestral):
+    """Converte taxa semestral para anual."""
+    return (1 + i_semestral)**2 - 1
+
+def taxa_semestral_para_trimestral(i_semestral):
+    """Converte taxa semestral para trimestral."""
+    return (1 + i_semestral)**(1/2) - 1
+
+def taxa_semestral_para_mensal(i_semestral):
+    """Converte taxa semestral para mensal."""
+    return (1 + i_semestral)**(1/6) - 1
+
+def taxa_semestral_para_diaria(i_semestral):
+    """Converte taxa semestral para diária."""
+    return (1 + i_semestral)**(1/126) - 1  # 252 dias / 2 semestres
+
+def taxa_trimestral_para_anual(i_trimestral):
+    """Converte taxa trimestral para anual."""
+    return (1 + i_trimestral)**4 - 1
+
+def taxa_trimestral_para_semestral(i_trimestral):
+    """Converte taxa trimestral para semestral."""
+    return (1 + i_trimestral)**2 - 1
+
+def taxa_trimestral_para_mensal(i_trimestral):
+    """Converte taxa trimestral para mensal."""
+    return (1 + i_trimestral)**(1/3) - 1
+
+def taxa_trimestral_para_diaria(i_trimestral):
+    """Converte taxa trimestral para diária."""
+    return (1 + i_trimestral)**(1/63) - 1  # 252 dias / 4 trimestres
+
+def taxa_mensal_para_semestral(i_mensal):
+    """Converte taxa mensal para semestral."""
+    return (1 + i_mensal)**6 - 1
+
+def taxa_mensal_para_trimestral(i_mensal):
+    """Converte taxa mensal para trimestral."""
+    return (1 + i_mensal)**3 - 1
+
+def taxa_mensal_para_diaria(i_mensal):
+    """Converte taxa mensal para diária."""
+    return (1 + i_mensal)**(1/21) - 1  # 252 dias úteis / 12 meses ≈ 21 dias por mês
+
+def taxa_diaria_para_anual(i_diaria):
+    """Converte taxa diária para anual."""
+    return (1 + i_diaria)**252 - 1
+
+def taxa_diaria_para_semestral(i_diaria):
+    """Converte taxa diária para semestral."""
+    return (1 + i_diaria)**126 - 1
+
+def taxa_diaria_para_trimestral(i_diaria):
+    """Converte taxa diária para trimestral."""
+    return (1 + i_diaria)**63 - 1
+
+def taxa_diaria_para_mensal(i_diaria):
+    """Converte taxa diária para mensal."""
+    return (1 + i_diaria)**21 - 1
 
 # ===========================================================
 # === OUTRAS FÓRMULAS =======================================
