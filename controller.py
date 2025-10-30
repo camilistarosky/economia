@@ -67,6 +67,7 @@ def desconto_simples_comercial(FV=None, PV=None, d=None, t=None):
     Desconto Comercial Simples (por fora)
     D = FV * d * t ; PV = FV - D
     """
+    D = None
     if FV and d and t:
         D = FV * d * t
         PV = FV - D
@@ -78,6 +79,9 @@ def desconto_simples_comercial(FV=None, PV=None, d=None, t=None):
         D = FV - PV
     elif FV and PV and d:
         t = (FV - PV) / (FV * d)
+        D = FV - PV
+    
+    if D is None and FV is not None and PV is not None:
         D = FV - PV
     return {"PV": PV, "FV": FV, "d": d, "t": t, "D": D}
 
@@ -95,7 +99,10 @@ def desconto_simples_racional(FV=None, PV=None, i=None, t=None):
         i = (FV / PV - 1) / t
     elif FV and PV and i:
         t = (FV / PV - 1) / i
-    D = FV - PV
+    
+    D = None
+    if FV is not None and PV is not None:
+        D = FV - PV
     return {"PV": PV, "FV": FV, "i": i, "t": t, "D": D}
 
 
@@ -112,7 +119,10 @@ def desconto_composto_comercial(FV=None, PV=None, d=None, t=None):
         d = 1 - (PV / FV)**(1 / t)
     elif FV and PV and d:
         t = math.log(PV / FV) / math.log(1 - d)
-    D = FV - PV
+    
+    D = None
+    if FV is not None and PV is not None:
+        D = FV - PV
     return {"PV": PV, "FV": FV, "d": d, "t": t, "D": D}
 
 
@@ -129,7 +139,10 @@ def desconto_composto_racional(FV=None, PV=None, i=None, t=None):
         i = (FV / PV)**(1 / t) - 1
     elif FV and PV and i:
         t = math.log(FV / PV) / math.log(1 + i)
-    D = FV - PV
+    
+    D = None
+    if FV is not None and PV is not None:
+        D = FV - PV
     return {"PV": PV, "FV": FV, "i": i, "t": t, "D": D}
 
 
@@ -148,8 +161,6 @@ def amortizacao_price(PV=None, PMT=None, i=None, n=None):
         PV = PMT * ((1 + i)**n - 1) / (i * (1 + i)**n)
     elif PV and PMT and i:
         n = math.log(PMT / (PMT - PV * i)) / math.log(1 + i)
-    elif PV and PMT and n:
-        i = ((PMT / PV) * ((1 + i)**n - 1)) / ((1 + i)**n)  # aproximação
     return {"PV": PV, "PMT": PMT, "i": i, "n": n}
 
 
@@ -259,7 +270,9 @@ def estimativa_valor_imovel(PMT, i):
 
 def titulo_divida(FV=None, PV=None):
     """Desconto simples entre FV e PV."""
-    D = FV - PV
+    D = None
+    if FV is not None and PV is not None:
+        D = FV - PV
     return {"Desconto": D, "FV": FV, "PV": PV}
 
 def fibonacci_series(x, termos=10):
@@ -269,3 +282,10 @@ def fibonacci_series(x, termos=10):
         F.append(F[-1] + F[-2])
     S = sum(F[k] / (x ** k) for k in range(termos))
     return {"Sequência": F, "Soma": S}
+    
+def digito_verificador_rg(numero):
+    """Calcula o dígito verificador do RG (mod 11)."""
+    numero = str(numero).zfill(9)
+    soma = sum((10 - i) * int(numero[i]) for i in range(9))
+    resto = soma % 11
+    return resto  # 10 caso seja o verificador X

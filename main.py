@@ -204,59 +204,187 @@ def main():
                         case "*":
                             pass
 
-                case "3": # FALTA AJUSTAR
-                    print("Você selecionou Descontos.")
+                case "3":
+                    print("Você selecionou DESCONTOS.")
                     print("O que você deseja descobrir?")
-                    print("1 - Valor presente de um desconto")
-                    print("2 - Valor futuro de um desconto")
-                    print("3 - Valor presente de um desconto racional")
-                    print("4 - Valor futuro de um desconto racional")
-                    print(" * - sair")
+                    print("1 - Desconto Comercial Simples")
+                    print("2 - Desconto Racional Simples")
+                    print("3 - Desconto Comercial Composto")
+                    print("4 - Desconto Racional Composto")
+                    print(" * - Sair")
                     opcaoD = input("Digite o número da opção desejada: ")
                     print("----------------------------------------")
-    
+        
                     match opcaoD:
+                        # === DESCONTO COMERCIAL SIMPLES ===
                         case "1":
-                            print("Você selecionou Valor presente de um desconto.")
-                            print("Digite os valores:")
-                            P = float(input("Valor do desconto: "))
-                            i = float(input("Taxa por período: "))
-                            n = float(input("Número de períodos: "))
-                            resultado = controller.desconto_simples(P, i, n)
-                            print(f"O valor presente do desconto é: {resultado:.2f}")
-    
+                            print("Você selecionou Desconto Comercial Simples.")
+                            print("1 - Calcular Valor Presente (PV)")
+                            print("2 - Calcular Valor Futuro (FV)")
+                            print("3 - Calcular Taxa de Desconto (d)")
+                            print("4 - Calcular Tempo (t)")
+                            sub_opcao = input("Escolha a opção desejada: ")
+        
+                            match sub_opcao:
+                                case "1":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    d = float(input("Taxa de desconto (d): ")) / 100
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_simples_comercial(FV=FV, d=d, t=t)
+                                    print(f"Resultado: {r}")
+
+                                case "2":
+                                    PV = float(input("Valor presente (PV): "))
+                                    d = float(input("Taxa de desconto (d): "))/ 100
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_simples_comercial(PV=PV, d=d, t=t)
+                                    print(f"Resultado: {r}")
+
+                                case "3":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    PV = float(input("Valor presente (PV): "))
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_simples_comercial(FV=FV, PV=PV, t=t)
+                                    print(f"Resultado: {r}")
+
+                                case "4":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    PV = float(input("Valor presente (PV): "))
+                                    d = float(input("Taxa de desconto (d): "))/ 100
+                                    r = controller.desconto_simples_comercial(FV=FV, PV=PV, d=d)
+                                    print(f"Resultado: {r}")
+
+                                case _:
+                                    print("Opção inválida.")
+                
+                        # === DESCONTO RACIONAL SIMPLES ===
                         case "2":
-                            print("Você selecionou Valor futuro de um desconto.")
-                            print("Digite os valores:")
-                            P = float(input("Valor do desconto: "))
-                            i = float(input("Taxa por período: "))
-                            n = float(input("Número de períodos: "))
-                            resultado = controller.desconto_composto(P, i, n)
-                            print(f"O valor futuro do desconto é: {resultado:.2f}")
+                            print("Você selecionou Desconto Racional Simples.")
+                            print("1 - Calcular Valor Presente (PV)")
+                            print("2 - Calcular Valor Futuro (FV)")
+                            print("3 - Calcular Taxa de Juros (i)")
+                            print("4 - Calcular Tempo (t)")
+                            sub_opcao = input("Escolha a opção desejada: ")
+        
+                            match sub_opcao:
+                                case "1":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    i = float(input("Taxa de juros (i): "))/ 100
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_simples_racional(FV=FV, i=i, t=t)
+                                    print(f"Resultado: {r}")
 
+                                case "2":
+                                    PV = float(input("Valor presente (PV): "))
+                                    i = float(input("Taxa de juros (i): "))/ 100
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_simples_racional(PV=PV, i=i, t=t)
+                                    print(f"Resultado: {r}")
+
+                                case "3":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    PV = float(input("Valor presente (PV): "))
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_simples_racional(FV=FV, PV=PV, t=t)
+                                    print(f"Resultado: {r}")
+
+                                case "4":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    PV = float(input("Valor presente (PV): "))
+                                    i = float(input("Taxa de juros (i): "))/ 100
+                                    r = controller.desconto_simples_racional(FV=FV, PV=PV, i=i)
+                                    print(f"Resultado: {r}")
+
+                                case _:
+                                    print("Opção inválida.")
+                
+                        # === DESCONTO COMERCIAL COMPOSTO ===
                         case "3":
-                            print(
-                                "Você selecionou Valor presente de um desconto racional."
-                            )
-                            print("Digite os valores:")
-                            P = float(input("Valor do desconto: "))
-                            i = float(input("Taxa por período: "))
-                            n = float(input("Número de períodos: "))
-                            resultado = controller.desconto_racional(P, i, n)
-                            print(f"O valor presente do desconto racional é: {resultado:.2f}")
+                            print("Você selecionou Desconto Comercial Composto.")
+                            print("1 - Calcular Valor Presente (PV)")
+                            print("2 - Calcular Valor Futuro (FV)")
+                            print("3 - Calcular Taxa de Desconto (d)")
+                            print("4 - Calcular Tempo (t)")
+                            sub_opcao = input("Escolha a opção desejada: ")
+        
+                            match sub_opcao:
+                                case "1":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    d = float(input("Taxa de desconto (d): "))/ 100
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_composto_comercial(FV=FV, d=d, t=t)
+                                    print(f"Resultado: {r}")
 
+                                case "2":
+                                    PV = float(input("Valor presente (PV): "))
+                                    d = float(input("Taxa de desconto (d): "))/ 100
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_composto_comercial(PV=PV, d=d, t=t)
+                                    print(f"Resultado: {r}")
+
+                                case "3":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    PV = float(input("Valor presente (PV): "))
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_composto_comercial(FV=FV, PV=PV, t=t)
+                                    print(f"Resultado: {r}")
+
+                                case "4":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    PV = float(input("Valor presente (PV): "))
+                                    d = float(input("Taxa de desconto (d): "))/ 100
+                                    r = controller.desconto_composto_comercial(FV=FV, PV=PV, d=d)
+                                    print(f"Resultado: {r}")
+
+                                case _:
+                                    print("Opção inválida.")
+        
+        
+                        # === DESCONTO RACIONAL COMPOSTO ===
                         case "4":
-                            print(
-                                "Você selecionou Valor futuro de um desconto racional."
-                            )
-                            print("Digite os valores:")
-                            P = float(input("Valor do desconto: "))
-                            i = float(input("Taxa por período: "))
-                            n = float(input("Número de períodos: "))
-                            resultado = controller.desconto_racional_futuro(P, i, n)
-    
+                            print("Você selecionou Desconto Racional Composto.")
+                            print("1 - Calcular Valor Presente (PV)")
+                            print("2 - Calcular Valor Futuro (FV)")
+                            print("3 - Calcular Taxa de Juros (i)")
+                            print("4 - Calcular Tempo (t)")
+                            sub_opcao = input("Escolha a opção desejada: ")
+        
+                            match sub_opcao:
+                                case "1":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    i = float(input("Taxa de juros (i): "))/ 100
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_composto_racional(FV=FV, i=i, t=t)
+                                    print(f"Resultado: {r}")
+
+                                case "2":
+                                    PV = float(input("Valor presente (PV): "))
+                                    i = float(input("Taxa de juros (i): "))/ 100
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_composto_racional(PV=PV, i=i, t=t)
+                                    print(f"Resultado: {r}")
+
+                                case "3":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    PV = float(input("Valor presente (PV): "))
+                                    t = float(input("Tempo (t): "))
+                                    r = controller.desconto_composto_racional(FV=FV, PV=PV, t=t)
+                                    print(f"Resultado: {r}")
+
+                                case "4":
+                                    FV = float(input("Valor futuro (FV): "))
+                                    PV = float(input("Valor presente (PV): "))
+                                    i = float(input("Taxa de juros (i): "))/ 100
+                                    r = controller.desconto_composto_racional(FV=FV, PV=PV, i=i)
+                                    print(f"Resultado: {r}")
+
+                                case _:
+                                    print("Opção inválida.")
+        
+        
                         case "*":
-                            pass
+                            print("Saindo do menu de descontos...")
+
     
                 case "4":
                     print("Você selecionou Amortização de Empréstimos.")
@@ -280,10 +408,10 @@ def main():
                         case "2":
                             print("Você selecionou Valor presente (PV).")
                             print("Digite os valores:")
-                            FV = float(input("PMT: "))
+                            PMT = float(input("PMT: "))
                             i = float(input("Taxa por período: "))
                             n = float(input("Número de períodos: "))
-                            resultado = controller.amortizacao_price(FV=FV, i=i, n=n)
+                            resultado = controller.amortizacao_price(PMT=PMT, i=i, n=n)
                             print(f"O Valor presente (PV) é: {resultado:.2f}")
 
                         case "3":
@@ -312,7 +440,7 @@ def main():
                     print("1 - Taxa nominal para efetiva")
                     print("2 - Taxa efetiva para nominal")
                     print("3 - Equivalência de taxas")
-                    print("TAXAS ANUAIS"------------)
+                    print("TAXAS ANUAIS------------")
                     print("4 - Taxa anual para mensal")
                     print("5 - Taxa anual para trimestral")
                     print("6 - Tava anual para semestral")
@@ -344,15 +472,15 @@ def main():
                         case "1":
                             print("Você selecionou Taxa nominal para efetiva.")
                             print("Digite os valores:")
-                            i_nominal = float(input("Taxa nominal: "))
-                            m = float(input("Número de períodos: "))
+                            i_nominal = float(input("Taxa nominal: ")) / 100
+                            m = float(input("Número de períodos: ")) 
                             resultado = controller.taxa_nominal_para_efetiva(i_nominal, m)
                             print(f"A taxa efetiva é: {resultado:.2f}")
 
                         case "2":    
                             print("Você selecionou Taxa efetiva para nominal.")
                             print("Digite os valores:")
-                            i_efetiva = float(input("Taxa efetiva: "))
+                            i_efetiva = float(input("Taxa efetiva: ")) / 100
                             m = float(input("Número de períodos: "))
                             resultado = controller.taxa_efetiva_para_nominal(i_efetiva, m)
                             print(f"A taxa nominal é: {resultado:.2f}")
@@ -360,7 +488,7 @@ def main():
                         case "3":
                             print("Você selecionou Equivalência de taxas.")
                             print("Digite os valores:")
-                            i_origem = float(input("Taxa de origem: "))
+                            i_origem = float(input("Taxa de origem: ")) / 100
                             p_origem = float(input("Período de origem: "))
                             p_destino = float(input("Período de destino: "))
                             resultado = controller.taxa_equivalente(i_origem, p_origem, p_destino)
@@ -369,125 +497,125 @@ def main():
                         # TAXAS ANUAIS
                         case "4":
                             print("Você selecionou Taxa anual para mensal.")
-                            i_anual = float(input("Taxa anual: "))
+                            i_anual = float(input("Taxa anual: ")) / 100
                             resultado = controller.taxa_anual_para_mensal(i_anual)
                             print(f"A taxa mensal é: {resultado:.6f}")
 
                         case "5":
                             print("Você selecionou Taxa anual para trimestral.")
-                            i_anual = float(input("Taxa anual: "))
+                            i_anual = float(input("Taxa anual: ")) / 100
                             resultado = controller.taxa_anual_para_trimestral(i_anual)
                             print(f"A taxa trimestral é: {resultado:.6f}")
 
                         case "6":
                             print("Você selecionou Taxa anual para semestral.")
-                            i_anual = float(input("Taxa anual: "))
+                            i_anual = float(input("Taxa anual: ")) / 100
                             resultado = controller.taxa_anual_para_semestral(i_anual)
                             print(f"A taxa semestral é: {resultado:.6f}")
 
                         case "7":
                             print("Você selecionou Taxa anual para diária.")
-                            i_anual = float(input("Taxa anual: "))
+                            i_anual = float(input("Taxa anual: ")) / 100
                             resultado = controller.taxa_anual_para_diaria(i_anual)
                             print(f"A taxa diária é: {resultado:.6f}")
 
                         # TAXAS SEMESTRAIS
                         case "8":
                             print("Você selecionou Taxa semestral para anual.")
-                            i_semestral = float(input("Taxa semestral: "))
+                            i_semestral = float(input("Taxa semestral: ")) / 100
                             resultado = controller.taxa_semestral_para_anual(i_semestral)
                             print(f"A taxa anual é: {resultado:.6f}")
 
                         case "9":
                             print("Você selecionou Taxa semestral para trimestral.")
-                            i_semestral = float(input("Taxa semestral: "))
+                            i_semestral = float(input("Taxa semestral: ")) / 100
                             resultado = controller.taxa_semestral_para_trimestral(i_semestral)
                             print(f"A taxa trimestral é: {resultado:.6f}")
 
                         case "10":
                             print("Você selecionou Taxa semestral para mensal.")
-                            i_semestral = float(input("Taxa semestral: "))
+                            i_semestral = float(input("Taxa semestral: ")) / 100
                             resultado = controller.taxa_semestral_para_mensal(i_semestral)
                             print(f"A taxa mensal é: {resultado:.6f}")
 
                         case "11":
                             print("Você selecionou Taxa semestral para diária.")
-                            i_semestral = float(input("Taxa semestral: "))
+                            i_semestral = float(input("Taxa semestral: ")) / 100
                             resultado = controller.taxa_semestral_para_diaria(i_semestral)
                             print(f"A taxa diária é: {resultado:.6f}")
 
                         # TAXAS TRIMESTRAIS
                         case "12":
                             print("Você selecionou Taxa trimestral para anual.")
-                            i_trimestral = float(input("Taxa trimestral: "))
+                            i_trimestral = float(input("Taxa trimestral: ")) / 100
                             resultado = controller.taxa_trimestral_para_anual(i_trimestral)
                             print(f"A taxa anual é: {resultado:.6f}")
 
                         case "13":
                             print("Você selecionou Taxa trimestral para semestral.")
-                            i_trimestral = float(input("Taxa trimestral: "))
+                            i_trimestral = float(input("Taxa trimestral: ")) / 100
                             resultado = controller.taxa_trimestral_para_semestral(i_trimestral)
                             print(f"A taxa semestral é: {resultado:.6f}")
 
                         case "14":
                             print("Você selecionou Taxa trimestral para mensal.")
-                            i_trimestral = float(input("Taxa trimestral: "))
+                            i_trimestral = float(input("Taxa trimestral: ")) / 100
                             resultado = controller.taxa_trimestral_para_mensal(i_trimestral)
                             print(f"A taxa mensal é: {resultado:.6f}")
 
                         case "15":
                             print("Você selecionou Taxa trimestral para diária.")
-                            i_trimestral = float(input("Taxa trimestral: "))
+                            i_trimestral = float(input("Taxa trimestral: ")) / 100
                             resultado = controller.taxa_trimestral_para_diaria(i_trimestral)
                             print(f"A taxa diária é: {resultado:.6f}")
 
                         # TAXAS MENSAIS
                         case "16":
                             print("Você selecionou Taxa mensal para anual.")
-                            i_mensal = float(input("Taxa mensal: "))
+                            i_mensal = float(input("Taxa mensal: ")) / 100
                             resultado = controller.taxa_mensal_para_anual(i_mensal)
                             print(f"A taxa anual é: {resultado:.6f}")
 
                         case "17":
                             print("Você selecionou Taxa mensal para semestral.")
-                            i_mensal = float(input("Taxa mensal: "))
+                            i_mensal = float(input("Taxa mensal: ")) / 100
                             resultado = controller.taxa_mensal_para_semestral(i_mensal)
                             print(f"A taxa semestral é: {resultado:.6f}")
 
                         case "18":
                             print("Você selecionou Taxa mensal para trimestral.")
-                            i_mensal = float(input("Taxa mensal: "))
+                            i_mensal = float(input("Taxa mensal: ")) / 100
                             resultado = controller.taxa_mensal_para_trimestral(i_mensal)
                             print(f"A taxa trimestral é: {resultado:.6f}")
 
                         case "19":
                             print("Você selecionou Taxa mensal para diária.")
-                            i_mensal = float(input("Taxa mensal: "))
+                            i_mensal = float(input("Taxa mensal: ")) / 100
                             resultado = controller.taxa_mensal_para_diaria(i_mensal)
                             print(f"A taxa diária é: {resultado:.6f}")
 
                         # TAXAS DIÁRIAS
                         case "20":
                             print("Você selecionou Taxa diária para anual.")
-                            i_diaria = float(input("Taxa diária: "))
+                            i_diaria = float(input("Taxa diária: ")) / 100
                             resultado = controller.taxa_diaria_para_anual(i_diaria)
                             print(f"A taxa anual é: {resultado:.6f}")
 
                         case "21":
                             print("Você selecionou Taxa diária para semestral.")
-                            i_diaria = float(input("Taxa diária: "))
+                            i_diaria = float(input("Taxa diária: ")) / 100
                             resultado = controller.taxa_diaria_para_semestral(i_diaria)
                             print(f"A taxa semestral é: {resultado:.6f}")
 
                         case "22":
                             print("Você selecionou Taxa diária para trimestral.")
-                            i_diaria = float(input("Taxa diária: "))
+                            i_diaria = float(input("Taxa diária: ")) / 100
                             resultado = controller.taxa_diaria_para_trimestral(i_diaria)
                             print(f"A taxa trimestral é: {resultado:.6f}")
 
                         case "23":
                             print("Você selecionou Taxa diária para mensal.")
-                            i_diaria = float(input("Taxa diária: "))
+                            i_diaria = float(input("Taxa diária: ")) / 100
                             resultado = controller.taxa_diaria_para_mensal(i_diaria)
                             print(f"A taxa mensal é: {resultado:.6f}")
 
