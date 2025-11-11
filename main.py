@@ -303,20 +303,41 @@ def main():
                         print("1 - Taxa nominal para efetiva")
                         print("2 - Taxa efetiva para nominal")
                         print("3 - Equivalência de taxas")
+                        print("4 - Compor aumentos ou descontos sucessivos (mesma taxa repetida)")
+                        
+
                         op = input("Escolha: ")
                         if op == "1":
                             i_nom = read_float("Taxa nominal (em %): ")/100
                             m = int(read_float("m (capitalizações por ano): "))
                             print(f"i_ef = {controller.taxa_nominal_para_efetiva(i_nom, m)*100:.6f} %")
+                            
                         elif op == "2":
                             i_ef = read_float("Taxa efetiva (em %): ")/100
                             m = int(read_float("m (vezes/ano): "))
                             print(f"i_nom = {controller.taxa_efetiva_para_nominal(i_ef, m)*100:.6f} %")
-                        else:
+                        elif op == "3":
                             i_o = read_float("Taxa de origem (em %): ")/100
                             p_o = read_float("Período de origem (em meses): ")
                             p_d = read_float("Período de destino (em meses): ")
                             print(f"i_eq = {controller.taxa_equivalente(i_o, p_o, p_d)*100:.6f} %")
+
+                        elif op == "4":
+                            # mesma taxa repetida k vezes
+                            taxa = read_float("Digite a taxa (em %, ex: 29 para 29%): ") / 100
+                            k = int(read_float("Quantas vezes essa taxa se repete? (inteiro): "))
+                            tipo = ""
+                            while tipo not in ("1", "2"):
+                                print("Escolha tipo: 1 - Aumento sucessivo   2 - Desconto sucessivo")
+                                tipo = input("Digite 1 ou 2: ").strip()
+                            tipo_text = "aumento" if tipo == "1" else "desconto"
+                            res = controller.variacao_repetida(taxa, k, tipo=tipo_text)
+                            # Mostrar resultado: para aumento mostramos aumento em %; para desconto mostramos desconto em %
+                            if tipo_text == "aumento":
+                                print(f"Variação equivalente (aumento) = {res['percent']:.6f} %")
+                            else:
+                                print(f"Desconto equivalente = {res['percent']:.6f} %")
+                            print(f"(fator total multiplicativo = {res['fator_total']:.6f})")
 
                     case "6":
                         x = read_float("Valor de x: ")

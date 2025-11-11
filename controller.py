@@ -265,3 +265,52 @@ def digito_verificador_rg(numero):
     soma = sum((10 - i) * int(numero[i]) for i in range(9))
     resto = soma % 11
     return resto
+
+# ===========================================================
+# === VARIAÇÃO SUCESSIVA (repetida ou lista) =================
+# ===========================================================
+
+def variacao_repetida(taxa_decimal, k, tipo="aumento"):
+    """
+    Calcula o equivalente quando a mesma taxa se repete k vezes.
+    - taxa_decimal: ex 0.29 para 29%
+    - k: número de repetições (int)
+    - tipo: "aumento" ou "desconto"
+    Retorna dict com:
+      - 'decimal' : valor decimal do aumento/desconto equivalente (ex: 1.146689 -> 114.6689% aumento; 
+                    para desconto retorna valor POSITIVO do desconto equivalente, ex: 0.19 => 19%)
+      - 'percent' : em %
+      - 'tipo'    : "aumento" ou "desconto"
+    OBS: Para desconto retornamos o desconto equivalente em decimal positivo (ex: 0.19).
+    """
+    if k < 0:
+        raise ValueError("k deve ser inteiro não-negativo")
+    if tipo not in ("aumento", "desconto"):
+        raise ValueError("tipo deve ser 'aumento' ou 'desconto'")
+
+    r = float(taxa_decimal)
+    k = int(k)
+
+    if tipo == "aumento":
+        fator_total = (1 + r) ** k
+        decimal_eq = fator_total - 1              # >0 para aumento
+    else:  # desconto
+        fator_total = (1 - r) ** k
+        decimal_eq = 1 - fator_total              # desconto equivalente (positivo)
+
+    return {"decimal": decimal_eq, "percent": decimal_eq * 100, "tipo": tipo, "fator_total": fator_total}
+
+
+def variacao_sucessiva_list(taxas_decimal):
+    """
+    Calcula o equivalente para uma lista de taxas (podem ser positivas para aumentos
+    ou negativas para descontos). Ex: [0.10, -0.05, 0.08].
+    Retorna decimal (positivo para aumento líquido, negativo se queda líquida),
+    e percent (decimal*100).
+    Obs: aqui aceitamos sinal nas taxas (ex: -0.10 para desconto de 10%).
+    """
+    fator = 1.0
+    for t in taxas_decimal:
+        fator *= (1 + float(t))
+    decimal_eq = fator - 1
+    return {"decimal": decimal_eq, "percent": decimal_eq * 100, "fator_total": fator}
