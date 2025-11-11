@@ -338,7 +338,7 @@ def main():
                             else:
                                 print(f"Desconto equivalente = {res['percent']:.6f} %")
                             print(f"(fator total multiplicativo = {res['fator_total']:.6f})")
-
+    
                     case "6":
                         x = read_float("Valor de x: ")
                         termos = int(read_float("Número de termos: "))
